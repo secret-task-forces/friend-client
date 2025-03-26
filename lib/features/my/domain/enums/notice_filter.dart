@@ -1,0 +1,1 @@
+enum NoticeFilter { latest, oldest }
