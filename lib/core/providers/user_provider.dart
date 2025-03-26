@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/core/constants/app_keys.dart';
 import 'package:flutter_template/di/app_module.dart';
 import 'package:flutter_template/features/account/data/models/request/patch_consent_model.dart';
-import 'package:flutter_template/features/account/data/models/request/put_fcm_token_model.dart';
-import 'package:flutter_template/core/sdk/firebase_sdk.dart';
 import 'package:flutter_template/core/sdk/storage_sdk.dart';
 import 'package:flutter_template/features/account/di/account_module.dart';
 import 'package:flutter_template/features/account/domain/entities/account.dart';
@@ -36,13 +34,6 @@ class UserStateNotifier extends AsyncNotifier<Account?> {
 
   void userUpdate(Account customer) {
     state = AsyncValue.data(customer);
-  }
-
-  Future<void> patchFcmToken() async {
-    final token = await FirebaseSdk.instanceToken();
-    await _accountRepository.patchFcmToken(
-      fcmToken: PutFcmTokenModel(fcmToken: token),
-    );
   }
 
   Future<void> updateConsent({required ConsentType consentType}) async {

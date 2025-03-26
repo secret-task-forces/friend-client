@@ -88,8 +88,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     if (ref.read(userProvider).valueOrNull == null) {
       return;
     } else {
-      ref.read(userProvider.notifier).patchFcmToken();
-
       if (mounted) {
         context.goNamed(AppRoute.HomePage.name);
       }

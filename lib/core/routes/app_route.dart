@@ -21,6 +21,11 @@ enum AppRoute {
     path: '/home',
     name: 'home',
   ),
+  HomeDetailPage(
+    absolutePath: '/home/detail',
+    path: 'detail',
+    name: 'home-detail',
+  ),
   MyPage(
     absolutePath: '/my',
     path: '/my',

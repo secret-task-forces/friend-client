@@ -9,22 +9,10 @@ import 'package:flutter_template/core/routes/app_route_config.dart';
 import 'package:flutter_template/core/sdk/sns_login_sdk.dart';
 import 'package:flutter_template/di/app_module.dart';
 import 'package:flutter_template/features/account/di/account_module.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/shared/components/feedback/app_loading_widget.dart';
-import 'package:flutter_template/shared/foundation/app_color.dart';
-// import 'package:flutter_web_plugins/flutter_web_plugins.dart'
-//     if (kIsWeb) 'package:flutter_web_plugins/flutter_web_plugins.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'config/firebase_options_dev.dart' as dev;
-import 'config/firebase_options_prod.dart' as prod;
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await initFirebase();
-}
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void main() {
   initApp();
@@ -42,27 +30,16 @@ void main() {
   );
 }
 
-Future<void> initFirebase() async {
-  await Firebase.initializeApp(
-      options: Env.IS_DEV
-          ? dev.DefaultFirebaseOptions.currentPlatform
-          : prod.DefaultFirebaseOptions.currentPlatform);
-}
-
 Future<void> initApp() async {
   if (kIsWeb) {
-    // usePathUrlStrategy();
+    usePathUrlStrategy();
   }
 
   WidgetsFlutterBinding.ensureInitialized();
 
   await Env.init();
 
-  // await initFirebase();
-
   await SnsLoginSdk.initSnsLogin();
-
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -99,28 +76,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      if (kIsWeb) {
-        return Container(
-          color: AppColors.gray.shade200,
-          child: Center(
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 600),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 0),
-                  ),
-                ],
-              ),
-              child: App(ref: ref),
-            ),
-          ),
-        );
-      }
-
       return App(ref: ref);
     });
   }
@@ -139,7 +94,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: ref.read(routerProvider),
-      title: 'Flutter Template',
+      title: 'Friend',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

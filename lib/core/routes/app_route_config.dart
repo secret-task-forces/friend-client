@@ -1,5 +1,6 @@
 import 'package:flutter_template/di/app_module.dart';
 import 'package:flutter_template/features/force_update/presentation/pages/force_update_page.dart';
+import 'package:flutter_template/features/home/presentation/pages/detail/home_detail_page.dart';
 import 'package:flutter_template/features/my/presestation/pages/account/account_page.dart';
 import 'package:flutter_template/features/my/presestation/pages/account/withdraw/withdraw_page.dart';
 import 'package:flutter_template/features/my/presestation/pages/my_page.dart';
@@ -67,6 +68,17 @@ final routerProvider = Provider<GoRouter>(
                   child: HomePage(),
                 );
               },
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _bottomNavigatorKey,
+                  path: AppRoute.HomeDetailPage.path,
+                  name: AppRoute.HomeDetailPage.name,
+                  builder: (context, state) => HomeDetailPage(
+                    videoId: state.uri.queryParameters['videoId'] ?? '',
+                    hash: state.uri.queryParameters['hash'] ?? '',
+                  ),
+                ),
+              ],
             ),
             GoRoute(
               parentNavigatorKey: _bottomNavigatorKey,

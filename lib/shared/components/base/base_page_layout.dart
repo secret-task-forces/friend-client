@@ -37,7 +37,7 @@ class BasePageLayout extends StatelessWidget {
           isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         SizedBox(
-          width: 984,
+          width: 1280,
           child: Row(
             children: [
               Expanded(
@@ -94,7 +94,7 @@ class BasePageLayout extends StatelessWidget {
         const SizedBox(height: 20),
         scrollable
             ? ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 984),
+                constraints: const BoxConstraints(maxWidth: 1280),
                 child: child,
               )
             : Expanded(child: child),
@@ -102,7 +102,7 @@ class BasePageLayout extends StatelessWidget {
     );
 
     return SizedBox(
-      width: 984,
+      width: 1280,
       height: double.infinity,
       child: scrollable
           ? SingleChildScrollView(

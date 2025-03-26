@@ -29,10 +29,30 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png" />
 
-    <title>flutter_template</title>
+    <title>Friend</title>
     <link rel="manifest" href="manifest.json" />
+    <script>
+      // 캐시 버스팅을 위한 버전 관리
+      var serviceWorkerVersion = Date.now().toString();
+    </script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   </head>
   <body>
-    <script src="flutter_bootstrap.js" async></script>
+    <script>
+      var scriptLoaded = false;
+      function loadMainDartJs() {
+        if (scriptLoaded) {
+          return;
+        }
+        scriptLoaded = true;
+        var scriptTag = document.createElement('script');
+        scriptTag.src = 'flutter_bootstrap.js?v=' + serviceWorkerVersion;
+        scriptTag.type = 'application/javascript';
+        document.body.append(scriptTag);
+      }
+
+      loadMainDartJs();
+    </script>
   </body>
 </html>

@@ -6,7 +6,6 @@ import 'package:flutter_template/shared/foundation/app_color.dart';
 import 'package:flutter_template/shared/foundation/app_typo.dart';
 import 'package:flutter_template/core/routes/app_route.dart';
 import 'package:flutter_template/shared/assets/asset_svg.dart';
-import 'package:flutter_template/core/utils/fcm_message_handler.dart';
 import 'package:flutter_template/core/utils/permission_handler.dart';
 
 class BottomNavigationScaffold extends ConsumerStatefulWidget {
@@ -26,15 +25,10 @@ class _BottomNavigationScaffoldState
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      PermissionHandler.requestPermission(context, ref);
-      FcmMessageHandler.initFirebaseMessaging(context, ref);
-    });
   }
 
   @override
   void dispose() {
-    FcmMessageHandler.dispose();
     super.dispose();
   }
 

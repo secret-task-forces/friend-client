@@ -29,7 +29,6 @@ class LoginViewModel extends AutoDisposeNotifier<LoginState> {
       (r) {
         state = state.copyWith(isTestLogin: true);
         ref.read(tokenProvider.notifier).updateToken(r);
-        ref.read(userProvider.notifier).patchFcmToken();
       },
     );
   }
@@ -115,7 +114,6 @@ class LoginViewModel extends AutoDisposeNotifier<LoginState> {
       debugPrint('Login Success : $r');
 
       ref.read(tokenProvider.notifier).updateToken(r);
-      ref.read(userProvider.notifier).patchFcmToken();
     });
   }
 
